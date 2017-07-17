@@ -16,6 +16,8 @@
 
 package org.axonframework.serializer;
 
+import java.io.Serializable;
+
 /**
  * Interface describing the structure of a serialized object.
  *
@@ -23,7 +25,7 @@ package org.axonframework.serializer;
  * @author Allard Buijze
  * @since 2.0
  */
-public interface SerializedObject<T> {
+public interface SerializedObject<T> extends Serializable {
 
     /**
      * Returns the type of this representation's data.

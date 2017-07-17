@@ -16,6 +16,8 @@
 
 package org.axonframework.serializer;
 
+import java.io.Serializable;
+
 /**
  * Marker interface for messages that have special serialization awareness. Typically, implementations will optimize
  * the serialization process by reusing serialized formats across invocations. This is particularly useful in cases
@@ -24,7 +26,7 @@ package org.axonframework.serializer;
  * @author Allard Buijze
  * @since 2.0
  */
-public interface SerializationAware {
+public interface SerializationAware extends Serializable {
 
     /**
      * Serialize the payload of this message using given <code>serializer</code>, using given

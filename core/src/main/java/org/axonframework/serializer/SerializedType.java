@@ -16,13 +16,15 @@
 
 package org.axonframework.serializer;
 
+import java.io.Serializable;
+
 /**
  * Describes the type of a serialized object. This information is used to decide how to deserialize an object.
  *
  * @author Allard Buijze
  * @since 2.0
  */
-public interface SerializedType {
+public interface SerializedType extends Serializable {
 
     /**
      * Returns the name of the serialized type. This may be the class name of the serialized object, or an alias for
