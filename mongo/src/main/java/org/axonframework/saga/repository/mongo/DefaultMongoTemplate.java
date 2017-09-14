@@ -62,6 +62,12 @@ public class DefaultMongoTemplate extends AuthenticatingMongoTemplate implements
         this.sagasCollectionName = sagasCollectionName;
     }
 
+    public DefaultMongoTemplate(Mongo mongo, String databaseName, String authenticationDatabaseName, String sagasCollectionName,
+                                String userName, char[] password) {
+        super(mongo, databaseName, authenticationDatabaseName, userName, password);
+        this.sagasCollectionName = sagasCollectionName;
+    }
+
     @Override
     public DBCollection sagaCollection() {
         return database().getCollection(sagasCollectionName);
