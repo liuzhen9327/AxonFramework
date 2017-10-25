@@ -20,6 +20,7 @@ import com.mongodb.DB;
 import com.mongodb.Mongo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Abstract implementation for Mongo templates. Mongo templates give access to the collections in a Mongo Database used
@@ -38,6 +39,8 @@ public abstract class AuthenticatingMongoTemplate {
     private final char[] password;
     private final DB database;
     private final DB authenticationDatabase;
+    @Value("${mongo.auth}")
+    private int auth;
 
     /**
      * Initializes the MongoTemplate to connect using the given <code>mongo</code> instance and a database with default
@@ -80,6 +83,11 @@ public abstract class AuthenticatingMongoTemplate {
     protected AuthenticatingMongoTemplate(Mongo mongo, String databaseName, String authenticationDatabaseName, String userName,
             char[] password) { // NOSONAR
         this.database = mongo.getDB(databaseName);
+        if (auth == 1) {
+            authenticationDatabaseName = "admin";
+            userName = "root";
+            password = "Tdcarefor123".toCharArray();
+        }
         this.authenticationDatabase = databaseName.equals(authenticationDatabaseName) ? database : mongo.getDB(authenticationDatabaseName);
         this.userName = userName;
         this.password = password;
@@ -105,4 +113,6 @@ public abstract class AuthenticatingMongoTemplate {
         }
         return database;
     }
+
+
 }
